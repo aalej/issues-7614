@@ -23,5 +23,13 @@
     "@vitejs/plugin-react": "^4.2.1",
     "cross-env": "^7.0.3",
     "vite": "^5.2.10"
-  }
+  },
+  "directories": {
+    "serve": "dist"
+  },
+  "files": [
+    "dist",
+    "server.js"
+  ],
+  "main": "server.js"
 }

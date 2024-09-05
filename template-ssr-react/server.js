@@ -15,7 +15,7 @@ const ssrManifest = isProduction
   : undefined
 
 // Create http server
-const app = express()
+const server = express()
 
 // Add Vite or respective production middlewares
 let vite
@@ -26,16 +26,16 @@ if (!isProduction) {
     appType: 'custom',
     base
   })
-  app.use(vite.middlewares)
+  server.use(vite.middlewares)
 } else {
   const compression = (await import('compression')).default
   const sirv = (await import('sirv')).default
-  app.use(compression())
-  app.use(base, sirv('./dist/client', { extensions: [] }))
+  server.use(compression())
+  server.use(base, sirv('./dist/client', { extensions: [] }))
 }
 
 // Serve HTML
-app.use('*', async (req, res) => {
+server.use('*', async (req, res) => {
   try {
     const url = req.originalUrl.replace(base, '')
 
@@ -54,8 +54,8 @@ app.use('*', async (req, res) => {
     const rendered = await render(url, ssrManifest)
 
     const html = template
-      .replace(`<!--app-head-->`, rendered.head ?? '')
-      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(`<!--server-head-->`, rendered.head ?? '')
+      .replace(`<!--server-html-->`, rendered.html ?? '')
 
     res.status(200).set({ 'Content-Type': 'text/html' }).send(html)
   } catch (e) {
@@ -66,6 +66,10 @@ app.use('*', async (req, res) => {
 })
 
 // Start http server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`)
 })
+
+export function app() {
+  return server
+}
