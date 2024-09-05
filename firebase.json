@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "source": "template-ssr-react",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}
