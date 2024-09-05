@@ -11,7 +11,7 @@ platfrom: macOS
 
 ## Notes
 
-Using the template from https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react, modified:
+Using the template from https://github.com/bluwy/create-vite-extra/tree/master/template-ssr-react and following the steps from https://firebase.google.com/docs/hosting/frameworks/express, modified:
 
 1. Added the ff to `package.json`
 
